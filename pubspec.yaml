@@ -1,0 +1,82 @@
+name: paper_shaders
+description: Flutter runtime shader port of Paper Shaders with 29 GLSL effects.
+version: 0.0.1
+homepage: https://github.com/AndreFrelicot/paper-shaders-flutter
+repository: https://github.com/AndreFrelicot/paper-shaders-flutter
+issue_tracker: https://github.com/AndreFrelicot/paper-shaders-flutter/issues
+documentation: https://github.com/AndreFrelicot/paper-shaders-flutter#readme
+
+topics:
+  - shaders
+  - flutter
+  - graphics
+  - animation
+  - effects
+
+screenshots:
+  - description: "Preview grid of all 29 Paper Shaders Flutter effects."
+    path: doc/showcase-grid.jpg
+
+environment:
+  sdk: ^3.11.5
+  flutter: ">=3.41.0"
+
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  web:
+  windows:
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+  shaders:
+    - shaders/dot_orbit.frag
+    - shaders/gem_smoke.frag
+    - shaders/grain_gradient.frag
+    - shaders/halftone_cmyk.frag
+    - shaders/halftone_dots.frag
+    - shaders/heatmap.frag
+    - shaders/image_dithering.frag
+    - shaders/liquid_metal.frag
+    - shaders/mesh_gradient.frag
+    - shaders/paper_texture.frag
+    - shaders/pulsing_border.frag
+    - shaders/simplex_noise.frag
+    - shaders/waves.frag
+    - shaders/color_panels.frag
+    - shaders/dithering.frag
+    - shaders/dot_grid.frag
+    - shaders/fluted_glass.frag
+    - shaders/god_rays.frag
+    - shaders/metaballs.frag
+    - shaders/neuro_noise.frag
+    - shaders/perlin_noise.frag
+    - shaders/smoke_ring.frag
+    - shaders/spiral.frag
+    - shaders/static_mesh_gradient.frag
+    - shaders/static_radial_gradient.frag
+    - shaders/swirl.frag
+    - shaders/voronoi.frag
+    - shaders/warp.frag
+    - shaders/water.frag
+  assets:
+    - assets/flowers.webp
+    - assets/gem_smoke.png
+    - assets/heatmap.png
+    - assets/liquid_metal.png
+    - assets/noise.png
+    - assets/test_image.webp

@@ -1,0 +1,120 @@
+name: Flutter CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  FLUTTER_VERSION: "3.41.9"
+
+jobs:
+  package:
+    name: Package quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Show Flutter version
+        run: flutter --version
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Check formatting
+        run: dart format --output=none --set-exit-if-changed lib test example/lib example/test
+
+      - name: Analyze package
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Validate publish dry run
+        run: flutter pub publish --dry-run
+
+      - name: Check pub.dev score
+        run: |
+          dart pub global activate pana
+          dart pub global run pana . --no-warning
+
+  example-android-web:
+    name: Example Android and web builds
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Install example dependencies
+        working-directory: example
+        run: flutter pub get
+
+      - name: Analyze example
+        working-directory: example
+        run: flutter analyze
+
+      - name: Test example
+        working-directory: example
+        run: flutter test
+
+      - name: Build web example
+        working-directory: example
+        run: flutter build web
+
+      - name: Build Android example
+        working-directory: example
+        run: flutter build apk --debug
+
+  example-apple:
+    name: Example Apple builds
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Install example dependencies
+        working-directory: example
+        run: flutter pub get
+
+      - name: Build macOS example
+        working-directory: example
+        run: flutter build macos --debug
+
+      - name: Build iOS simulator example
+        working-directory: example
+        run: flutter build ios --simulator --no-codesign

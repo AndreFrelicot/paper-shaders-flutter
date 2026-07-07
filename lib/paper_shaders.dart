@@ -1,0 +1,38 @@
+/// Paper Shaders Flutter public API.
+library;
+
+export 'src/shader_catalog.dart';
+export 'src/shader_color.dart';
+export 'src/shader_mount.dart';
+export 'src/shader_sampler.dart';
+export 'src/shader_sizing.dart';
+export 'src/shader_uniforms.dart';
+export 'src/shaders/color_panels.dart';
+export 'src/shaders/dithering.dart';
+export 'src/shaders/dot_grid.dart';
+export 'src/shaders/dot_orbit.dart';
+export 'src/shaders/fluted_glass.dart';
+export 'src/shaders/gem_smoke.dart';
+export 'src/shaders/god_rays.dart';
+export 'src/shaders/grain_gradient.dart';
+export 'src/shaders/halftone_cmyk.dart';
+export 'src/shaders/halftone_dots.dart';
+export 'src/shaders/heatmap.dart';
+export 'src/shaders/image_dithering.dart';
+export 'src/shaders/liquid_metal.dart';
+export 'src/shaders/mesh_gradient.dart';
+export 'src/shaders/metaballs.dart';
+export 'src/shaders/neuro_noise.dart';
+export 'src/shaders/paper_texture.dart';
+export 'src/shaders/perlin_noise.dart';
+export 'src/shaders/pulsing_border.dart';
+export 'src/shaders/simplex_noise.dart';
+export 'src/shaders/smoke_ring.dart';
+export 'src/shaders/spiral.dart';
+export 'src/shaders/static_mesh_gradient.dart';
+export 'src/shaders/static_radial_gradient.dart';
+export 'src/shaders/swirl.dart';
+export 'src/shaders/voronoi.dart';
+export 'src/shaders/warp.dart';
+export 'src/shaders/water.dart';
+export 'src/shaders/waves.dart';
