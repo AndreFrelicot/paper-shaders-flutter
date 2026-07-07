@@ -15,7 +15,7 @@ derived from the original Paper Shaders work.
 
 ```yaml
 dependencies:
-  paper_shaders: ^0.0.1
+  paper_shaders: ^0.0.2
 ```
 
 ## Usage

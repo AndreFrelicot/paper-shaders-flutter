@@ -140,11 +140,6 @@ float get_max_amp(float persistence, float octaveCount) {
   return (1.0 - pow(persistence, octaveCount)) / max(1e-4, (1.0 - persistence));
 }
 
-float normalizedNoiseAt(vec2 uv, float t, float octCount, float maxAmp) {
-  float noise = p_noise(vec3(uv, t), int(octCount), u_persistence, u_lacunarity);
-  return clamp((noise + maxAmp) / max(1e-4, (2. * maxAmp)) + (u_proportion - .5), 0.0, 1.0);
-}
-
 void main() {
   vec2 uv = ps_patternUV();
   uv *= .5;
@@ -152,12 +147,11 @@ void main() {
   float t = .2 * u_time;
 
   float octCount = floor(u_octaveCount);
+  float noise = p_noise(vec3(uv, t), int(octCount), u_persistence, u_lacunarity);
   float max_amp = get_max_amp(u_persistence, octCount);
-  float noise_normalized = normalizedNoiseAt(uv, t, octCount, max_amp);
-  float noiseX = normalizedNoiseAt(uv + .5 * ps_patternPixelStepX(), t, octCount, max_amp);
-  float noiseY = normalizedNoiseAt(uv + .5 * ps_patternPixelStepY(), t, octCount, max_amp);
+  float noise_normalized = clamp((noise + max_amp) / max(1e-4, (2. * max_amp)) + (u_proportion - .5), 0.0, 1.0);
   float sharpness = clamp(u_softness, 0., 1.);
-  float smooth_w = 0.5 * max(max(ps_finiteFwidth(noise_normalized, noiseX, noiseY), ps_pixelDerivative(0.5)), 0.001);
+  float smooth_w = 0.5 * max(ps_pixelDerivative(0.5), 0.001);
   float res = smoothstep(
   .5 - .5 * sharpness - smooth_w,
   .5 + .5 * sharpness + smooth_w,

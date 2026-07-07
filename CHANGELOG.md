@@ -1,3 +1,8 @@
+## 0.0.2
+
+- Optimized the `perlin-noise` shader by avoiding extra noise samples for
+  Flutter antialiasing, improving heavy presets such as Moss.
+
 ## 0.0.1
 
 - Initial Flutter runtime shader port of the 29 Paper Shaders effects.
