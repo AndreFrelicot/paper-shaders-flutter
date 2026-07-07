@@ -1,0 +1,12 @@
+paper_shaders
+
+This package is a Flutter runtime shader port of Paper Shaders
+(https://github.com/paper-design/shaders), licensed under the
+Apache License, Version 2.0. Shader source, algorithms, presets,
+the 128x128 noise texture asset, test images, and image-processing
+resources are derived from the original work.
+
+Original NOTICE from Paper Shaders:
+
+  Powered by Paper Shaders:
+  https://shaders.paper.design

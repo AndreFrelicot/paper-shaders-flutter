@@ -7,7 +7,9 @@ Flutter runtime shader port of
 
 The package exposes all 29 upstream shaders as typed Flutter widgets and
 catalogue entries. Each shader ships with upstream-aligned presets, deterministic
-`frame` support, and the assets needed by noise and image-based effects.
+`frame` support, and the assets needed by noise and image-based effects. Shader
+source, presets, noise textures, test images, and image-processing resources are
+derived from the original Paper Shaders work.
 
 ## Install
 
@@ -156,3 +158,8 @@ dart pub global run pana . --no-warning
 
 The package is expected to pass static analysis, compile every runtime shader,
 and keep `pana` at the maximum pub points score.
+
+## License
+
+Apache 2.0 - see `LICENSE` and `NOTICE`. Derived from
+[paper-design/shaders](https://github.com/paper-design/shaders).
