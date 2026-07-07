@@ -1539,15 +1539,17 @@ class _BooleanControl extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
-      child: SwitchListTile(
-        dense: true,
-        contentPadding: EdgeInsets.zero,
-        title: Text(
-          label,
-          style: const TextStyle(color: Color(0xffdfe2d2), fontSize: 13),
-        ),
-        value: value,
-        onChanged: onChanged,
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              label,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(color: Color(0xffdfe2d2), fontSize: 13),
+            ),
+          ),
+          Switch.adaptive(value: value, onChanged: onChanged),
+        ],
       ),
     );
   }
