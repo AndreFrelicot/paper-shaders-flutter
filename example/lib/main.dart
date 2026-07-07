@@ -896,7 +896,7 @@ class _PreviewPane extends StatelessWidget {
               frame: frame,
             ),
             if (showFpsHud)
-              const Positioned(left: 16, top: 16, child: _FpsHud()),
+              const Positioned(left: 16, bottom: 16, child: _FpsHud()),
             IgnorePointer(
               child: DecoratedBox(
                 decoration: BoxDecoration(
@@ -977,7 +977,11 @@ class _PreviewPane extends StatelessWidget {
                         frame: frame,
                       ),
                       if (showFpsHud)
-                        const Positioned(left: 14, top: 14, child: _FpsHud()),
+                        const Positioned(
+                          left: 14,
+                          bottom: 14,
+                          child: _FpsHud(),
+                        ),
                       IgnorePointer(
                         child: DecoratedBox(
                           decoration: BoxDecoration(
