@@ -116,6 +116,7 @@ class DotGridShader {
 
   /// Static asset key value.
   static const assetKey = 'packages/paper_shaders/shaders/dot_grid.frag';
+  static const isAnimated = false;
 
   /// Static presets value.
   static const presets = <DotGridPreset>[
@@ -160,6 +161,7 @@ class DotGridShader {
   static final catalogEntry = ShaderCatalogEntry(
     name: name,
     assetKey: assetKey,
+    isAnimated: isAnimated,
     presets: presets
         .map((preset) {
           return ShaderPreset(
@@ -187,6 +189,7 @@ class DotGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaperShader(
       assetKey: DotGridShader.assetKey,
+      isAnimated: DotGridShader.isAnimated,
       uniforms: params.uniforms,
       sizing: params.sizing,
       speed: params.speed,

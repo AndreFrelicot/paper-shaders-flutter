@@ -1,6 +1,6 @@
 name: paper_shaders
 description: Flutter runtime shader port of Paper Shaders with 29 GLSL effects.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/AndreFrelicot/paper-shaders-flutter
 repository: https://github.com/AndreFrelicot/paper-shaders-flutter
 issue_tracker: https://github.com/AndreFrelicot/paper-shaders-flutter/issues

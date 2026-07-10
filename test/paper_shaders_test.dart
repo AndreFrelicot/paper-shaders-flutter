@@ -362,4 +362,24 @@ void main() {
       contains('noise.png'),
     );
   });
+
+  test('catalog classifies shaders without time dependencies as static', () {
+    expect(
+      ShaderCatalog.all
+          .where((entry) => !entry.isAnimated)
+          .map((entry) => entry.name)
+          .toSet(),
+      <String>{
+        'dot-grid',
+        'fluted-glass',
+        'halftone-cmyk',
+        'halftone-dots',
+        'image-dithering',
+        'paper-texture',
+        'static-mesh-gradient',
+        'static-radial-gradient',
+        'waves',
+      },
+    );
+  });
 }

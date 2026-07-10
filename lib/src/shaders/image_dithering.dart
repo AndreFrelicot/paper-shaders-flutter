@@ -110,6 +110,7 @@ class ImageDitheringShader {
 
   /// Static asset key value.
   static const assetKey = 'packages/paper_shaders/shaders/image_dithering.frag';
+  static const isAnimated = false;
 
   /// Static image samplers value.
   static const imageSamplers = <ShaderImageSampler>[
@@ -160,6 +161,7 @@ class ImageDitheringShader {
   static final catalogEntry = ShaderCatalogEntry(
     name: name,
     assetKey: assetKey,
+    isAnimated: isAnimated,
     imageSamplers: imageSamplers,
     presets: presets
         .map((preset) {
@@ -191,6 +193,7 @@ class ImageDitheringView extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaperShader(
       assetKey: ImageDitheringShader.assetKey,
+      isAnimated: ImageDitheringShader.isAnimated,
       uniforms: params.uniforms,
       imageSamplers: ImageDitheringShader.imageSamplers,
       sizing: params.sizing,

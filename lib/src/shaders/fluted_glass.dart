@@ -186,6 +186,7 @@ class FlutedGlassShader {
 
   /// Static asset key value.
   static const assetKey = 'packages/paper_shaders/shaders/fluted_glass.frag';
+  static const isAnimated = false;
 
   /// Static image samplers value.
   static const imageSamplers = <ShaderImageSampler>[
@@ -258,6 +259,7 @@ class FlutedGlassShader {
   static final catalogEntry = ShaderCatalogEntry(
     name: name,
     assetKey: assetKey,
+    isAnimated: isAnimated,
     imageSamplers: imageSamplers,
     presets: presets
         .map((preset) {
@@ -286,6 +288,7 @@ class FlutedGlassView extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaperShader(
       assetKey: FlutedGlassShader.assetKey,
+      isAnimated: FlutedGlassShader.isAnimated,
       uniforms: params.uniforms,
       imageSamplers: FlutedGlassShader.imageSamplers,
       sizing: params.sizing,

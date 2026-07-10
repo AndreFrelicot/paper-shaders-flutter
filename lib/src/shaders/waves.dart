@@ -92,6 +92,7 @@ class WavesShader {
 
   /// Static asset key value.
   static const assetKey = 'packages/paper_shaders/shaders/waves.frag';
+  static const isAnimated = false;
 
   /// Static presets value.
   static const presets = <WavesPreset>[
@@ -141,6 +142,7 @@ class WavesShader {
   static final catalogEntry = ShaderCatalogEntry(
     name: name,
     assetKey: assetKey,
+    isAnimated: isAnimated,
     presets: presets
         .map((preset) {
           return ShaderPreset(
@@ -168,6 +170,7 @@ class WavesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaperShader(
       assetKey: WavesShader.assetKey,
+      isAnimated: WavesShader.isAnimated,
       uniforms: params.uniforms,
       sizing: params.sizing,
       speed: params.speed,

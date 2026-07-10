@@ -99,6 +99,7 @@ class StaticMeshGradientShader {
   /// Static asset key value.
   static const assetKey =
       'packages/paper_shaders/shaders/static_mesh_gradient.frag';
+  static const isAnimated = false;
 
   /// Static presets value.
   static const presets = <StaticMeshGradientPreset>[
@@ -149,6 +150,7 @@ class StaticMeshGradientShader {
   static final catalogEntry = ShaderCatalogEntry(
     name: name,
     assetKey: assetKey,
+    isAnimated: isAnimated,
     presets: presets
         .map((preset) {
           return ShaderPreset(
@@ -179,6 +181,7 @@ class StaticMeshGradientView extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaperShader(
       assetKey: StaticMeshGradientShader.assetKey,
+      isAnimated: StaticMeshGradientShader.isAnimated,
       uniforms: params.uniforms,
       sizing: params.sizing,
       speed: params.speed,

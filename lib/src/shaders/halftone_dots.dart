@@ -142,6 +142,7 @@ class HalftoneDotsShader {
 
   /// Static asset key value.
   static const assetKey = 'packages/paper_shaders/shaders/halftone_dots.frag';
+  static const isAnimated = false;
 
   /// Static image samplers value.
   static const imageSamplers = <ShaderImageSampler>[
@@ -199,6 +200,7 @@ class HalftoneDotsShader {
   static final catalogEntry = ShaderCatalogEntry(
     name: name,
     assetKey: assetKey,
+    isAnimated: isAnimated,
     imageSamplers: imageSamplers,
     presets: presets
         .map((preset) {
@@ -227,6 +229,7 @@ class HalftoneDotsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaperShader(
       assetKey: HalftoneDotsShader.assetKey,
+      isAnimated: HalftoneDotsShader.isAnimated,
       uniforms: params.uniforms,
       imageSamplers: HalftoneDotsShader.imageSamplers,
       sizing: params.sizing,

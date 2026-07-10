@@ -114,6 +114,7 @@ class StaticRadialGradientShader {
   /// Static asset key value.
   static const assetKey =
       'packages/paper_shaders/shaders/static_radial_gradient.frag';
+  static const isAnimated = false;
 
   /// Static presets value.
   static const presets = <StaticRadialGradientPreset>[
@@ -160,6 +161,7 @@ class StaticRadialGradientShader {
   static final catalogEntry = ShaderCatalogEntry(
     name: name,
     assetKey: assetKey,
+    isAnimated: isAnimated,
     presets: presets
         .map((preset) {
           return ShaderPreset(
@@ -190,6 +192,7 @@ class StaticRadialGradientView extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaperShader(
       assetKey: StaticRadialGradientShader.assetKey,
+      isAnimated: StaticRadialGradientShader.isAnimated,
       uniforms: params.uniforms,
       sizing: params.sizing,
       speed: params.speed,

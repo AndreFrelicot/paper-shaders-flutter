@@ -894,9 +894,14 @@ class _PreviewPane extends StatelessWidget {
               sizing: sizing,
               speed: speed,
               frame: frame,
+              isAnimated: entry.isAnimated,
             ),
             if (showFpsHud)
-              const Positioned(left: 16, bottom: 16, child: _FpsHud()),
+              Positioned(
+                left: 16,
+                bottom: 16,
+                child: _FpsHud(active: entry.isAnimated && speed != 0),
+              ),
             IgnorePointer(
               child: DecoratedBox(
                 decoration: BoxDecoration(
@@ -975,12 +980,15 @@ class _PreviewPane extends StatelessWidget {
                         sizing: sizing,
                         speed: speed,
                         frame: frame,
+                        isAnimated: entry.isAnimated,
                       ),
                       if (showFpsHud)
-                        const Positioned(
+                        Positioned(
                           left: 14,
                           bottom: 14,
-                          child: _FpsHud(),
+                          child: _FpsHud(
+                            active: entry.isAnimated && speed != 0,
+                          ),
                         ),
                       IgnorePointer(
                         child: DecoratedBox(
@@ -1005,7 +1013,9 @@ class _PreviewPane extends StatelessWidget {
 }
 
 class _FpsHud extends StatefulWidget {
-  const _FpsHud();
+  const _FpsHud({required this.active});
+
+  final bool active;
 
   @override
   State<_FpsHud> createState() => _FpsHudState();
@@ -1022,7 +1032,28 @@ class _FpsHudState extends State<_FpsHud> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _ticker = createTicker(_tick)..start();
+    _ticker = createTicker(_tick);
+    if (widget.active) {
+      _ticker.start();
+    }
+  }
+
+  @override
+  void didUpdateWidget(_FpsHud oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.active == widget.active) {
+      return;
+    }
+    _frames = 0;
+    _windowStart = null;
+    _lastElapsed = null;
+    _fps = 0;
+    _frameMs = 0;
+    if (widget.active) {
+      _ticker.start();
+    } else {
+      _ticker.stop();
+    }
   }
 
   @override
@@ -1186,41 +1217,43 @@ class _ControlPane extends StatelessWidget {
               onSelected: onPresetSelected,
             ),
           ),
-          const SizedBox(height: 20),
-          _ControlDragVisibility(
-            activeSliderKey: visibleSliderKey,
-            child: const _SectionTitle('Motion'),
-          ),
-          _ControlDragVisibility(
-            activeSliderKey: visibleSliderKey,
-            controlKey: 'motion.speed',
-            child: _NumberControl(
-              label: 'Speed',
-              value: speed,
-              min: 0,
-              max: 4,
-              divisions: 80,
-              sliderKey: 'motion.speed',
+          if (entry.isAnimated) ...[
+            const SizedBox(height: 20),
+            _ControlDragVisibility(
               activeSliderKey: visibleSliderKey,
-              onChanged: onSpeedChanged,
-              onActiveSliderChanged: onActiveSliderChanged,
+              child: const _SectionTitle('Motion'),
             ),
-          ),
-          _ControlDragVisibility(
-            activeSliderKey: visibleSliderKey,
-            controlKey: 'motion.frame',
-            child: _NumberControl(
-              label: 'Frame',
-              value: frame,
-              min: 0,
-              max: 120000,
-              divisions: 240,
-              sliderKey: 'motion.frame',
+            _ControlDragVisibility(
               activeSliderKey: visibleSliderKey,
-              onChanged: onFrameChanged,
-              onActiveSliderChanged: onActiveSliderChanged,
+              controlKey: 'motion.speed',
+              child: _NumberControl(
+                label: 'Speed',
+                value: speed,
+                min: 0,
+                max: 4,
+                divisions: 80,
+                sliderKey: 'motion.speed',
+                activeSliderKey: visibleSliderKey,
+                onChanged: onSpeedChanged,
+                onActiveSliderChanged: onActiveSliderChanged,
+              ),
             ),
-          ),
+            _ControlDragVisibility(
+              activeSliderKey: visibleSliderKey,
+              controlKey: 'motion.frame',
+              child: _NumberControl(
+                label: 'Frame',
+                value: frame,
+                min: 0,
+                max: 120000,
+                divisions: 240,
+                sliderKey: 'motion.frame',
+                activeSliderKey: visibleSliderKey,
+                onChanged: onFrameChanged,
+                onActiveSliderChanged: onActiveSliderChanged,
+              ),
+            ),
+          ],
           const SizedBox(height: 20),
           _ControlDragVisibility(
             activeSliderKey: visibleSliderKey,
@@ -1971,6 +2004,7 @@ class _PaperShadersGoldenAppState extends State<PaperShadersGoldenApp> {
               sizing: widget.target.preset.sizing,
               speed: 0,
               frame: 41500,
+              isAnimated: widget.target.entry.isAnimated,
             ),
           ),
         ),
@@ -2163,6 +2197,7 @@ PaperShader(
   sizing: customPreset.sizing,
   speed: customPreset.speed,
   frame: customPreset.frame,
+  isAnimated: $shaderType.catalogEntry.isAnimated,
 );
 ''';
 }

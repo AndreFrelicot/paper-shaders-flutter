@@ -174,6 +174,7 @@ class HalftoneCmykShader {
 
   /// Static asset key value.
   static const assetKey = 'packages/paper_shaders/shaders/halftone_cmyk.frag';
+  static const isAnimated = false;
 
   /// Static image samplers value.
   static const imageSamplers = <ShaderImageSampler>[
@@ -246,6 +247,7 @@ class HalftoneCmykShader {
   static final catalogEntry = ShaderCatalogEntry(
     name: name,
     assetKey: assetKey,
+    isAnimated: isAnimated,
     imageSamplers: imageSamplers,
     presets: presets
         .map((preset) {
@@ -274,6 +276,7 @@ class HalftoneCmykView extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaperShader(
       assetKey: HalftoneCmykShader.assetKey,
+      isAnimated: HalftoneCmykShader.isAnimated,
       uniforms: params.uniforms,
       imageSamplers: HalftoneCmykShader.imageSamplers,
       sizing: params.sizing,

@@ -39,6 +39,7 @@ class ShaderCatalogEntry {
     required this.assetKey,
     required this.presets,
     this.imageSamplers = const <ShaderImageSampler>[],
+    this.isAnimated = true,
   });
 
   /// Name.
@@ -49,6 +50,9 @@ class ShaderCatalogEntry {
 
   /// Image samplers.
   final List<ShaderImageSampler> imageSamplers;
+
+  /// Whether the fragment output depends on the global time uniform.
+  final bool isAnimated;
 
   /// Presets.
   final List<ShaderPreset> presets;

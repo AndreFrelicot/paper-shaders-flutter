@@ -122,6 +122,7 @@ class PaperTextureShader {
 
   /// Static asset key value.
   static const assetKey = 'packages/paper_shaders/shaders/paper_texture.frag';
+  static const isAnimated = false;
 
   /// Static image samplers value.
   static const imageSamplers = <ShaderImageSampler>[
@@ -192,6 +193,7 @@ class PaperTextureShader {
   static final catalogEntry = ShaderCatalogEntry(
     name: name,
     assetKey: assetKey,
+    isAnimated: isAnimated,
     imageSamplers: imageSamplers,
     presets: presets
         .map((preset) {
@@ -220,6 +222,7 @@ class PaperTextureView extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaperShader(
       assetKey: PaperTextureShader.assetKey,
+      isAnimated: PaperTextureShader.isAnimated,
       uniforms: params.uniforms,
       imageSamplers: PaperTextureShader.imageSamplers,
       sizing: params.sizing,

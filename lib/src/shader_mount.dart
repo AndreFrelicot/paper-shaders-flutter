@@ -18,6 +18,7 @@ class PaperShader extends StatefulWidget {
     this.sizing = const ShaderSizing.pattern(),
     this.speed = 1,
     this.frame = 0,
+    this.isAnimated = true,
     super.key,
   });
 
@@ -38,6 +39,9 @@ class PaperShader extends StatefulWidget {
 
   /// Frame.
   final double frame;
+
+  /// Whether the fragment output depends on the global time uniform.
+  final bool isAnimated;
 
   @override
   State<PaperShader> createState() => _PaperShaderState();
@@ -64,7 +68,7 @@ class _PaperShaderState extends State<PaperShader>
     } else {
       _loadImageSamplers();
     }
-    if (widget.speed != 0) {
+    if (_animationActive) {
       _ticker.start();
     }
   }
@@ -81,12 +85,14 @@ class _PaperShaderState extends State<PaperShader>
     )) {
       _loadImageSamplers();
     }
-    if (oldWidget.frame != widget.frame) {
+    if (widget.isAnimated &&
+        (oldWidget.frame != widget.frame || !oldWidget.isAnimated)) {
       _frame = widget.frame;
       _lastElapsed = null;
     }
-    if (oldWidget.speed != widget.speed) {
-      if (widget.speed == 0) {
+    if (oldWidget.speed != widget.speed ||
+        oldWidget.isAnimated != widget.isAnimated) {
+      if (!_animationActive) {
         _ticker.stop();
       } else if (!_ticker.isActive) {
         _lastElapsed = null;
@@ -208,7 +214,7 @@ class _PaperShaderState extends State<PaperShader>
   void _tick(Duration elapsed) {
     final last = _lastElapsed ?? elapsed;
     _lastElapsed = elapsed;
-    if (widget.speed == 0) {
+    if (!_animationActive) {
       return;
     }
     final deltaMs = (elapsed - last).inMicroseconds / 1000;
@@ -216,6 +222,8 @@ class _PaperShaderState extends State<PaperShader>
       _frame += deltaMs * widget.speed;
     });
   }
+
+  bool get _animationActive => widget.isAnimated && widget.speed != 0;
 
   @override
   /// Builds the shader widget.
