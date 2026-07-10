@@ -1,5 +1,7 @@
 enum ShowcaseUniformKind { float, color, colorArray }
 
+const stepsPerColorSliderRange = (min: 1.0, max: 100.0, divisions: 99);
+
 class ShowcaseUniformSpec {
   const ShowcaseUniformSpec.float(this.name)
     : kind = ShowcaseUniformKind.float,

@@ -2057,6 +2057,13 @@ _Range _rangeForFloat(
   if (name == 'u_colorsCount') {
     return const _Range(1, 10, 9);
   }
+  if (name == 'u_stepsPerColor') {
+    return _Range(
+      stepsPerColorSliderRange.min,
+      stepsPerColorSliderRange.max,
+      stepsPerColorSliderRange.divisions,
+    );
+  }
   if (name.contains('angle') || name.contains('Angle')) {
     return const _Range(-360, 360, 144);
   }
